@@ -44,8 +44,8 @@ class AcceptSocket(object):
                     event_sock.sendall(message)
 
             time.sleep(3)
-    def accpet_handler(self, sock, kqueue):
 
+    def accpet_handler(self, sock, kqueue):
         for i in range(_DEFAULT_BACKLOG):
             try:
                 conn,addr = sock.accept()
