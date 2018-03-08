@@ -24,7 +24,7 @@ class MainLoop(object):
         accept_socket.listen(5)
         accept_socket.setblocking(False)
         self.poll.register(accept_socket.fileno(),select.EPOLLIN)
-        self.fd_to_socket[accept_socket.fileno] = accept_socket
+        self.fd_to_socket[accept_socket.fileno()] = accept_socket
         self.accept_socket = accept_socket
 
     def start(self):
