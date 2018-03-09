@@ -17,9 +17,9 @@ class MainLoop(object):
 
     def bind(self, port):
         accept_sock = acceptsocket.AccpetSocket()
-        accept_sock = accept_sock.bind_socket(port)
-        self.poll.register(accept_sock.fileno(),const._EPOLLIN)
-        self.handlers[accept_sock.fileno()] = accept_sock.handle_event
+        bind_sock = accept_sock.bind_socket(port)
+        self.poll.register(bind_sock.fileno(),const._EPOLLIN)
+        self.handlers[bind_sock.fileno()] = accept_sock.handle_event
 
 
     def start(self):
