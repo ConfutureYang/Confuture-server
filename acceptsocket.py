@@ -7,7 +7,6 @@ import const
 import connection
 
 class AccpetSocket(object):
-    def __init__(self,sock):
 
     def bind_socket(self,port):
         host = ("",port)
