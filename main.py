@@ -1,5 +1,6 @@
-import MainLoop
+import mainioloop
 
-loop = MainLoop.MainLoop()
-loop.listen(8888)
+
+loop = mainioloop.MainLoop()
+loop.bind(8888)
 loop.start()

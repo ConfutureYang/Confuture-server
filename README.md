@@ -2,3 +2,6 @@
 使用IO多路复用的技术，用python代码构建一个python-web服务框架
 
 这个是在研读了tornado的源码之后，根据从tornado中所获得的一些想法，自己从无到有写一个python-web服务框架，目前正处于开出初期
+
+MainLoop 主要通过创建的epoll对象，不断地去进行poll来获取要进行读写的socket
+应该给每个
