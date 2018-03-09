@@ -22,4 +22,4 @@ class AccpetSocket(object):
         conn.setblocking(False)
         connec_context = connection.HTTPConnection(conn)
         loop.poll.register(conn.fileno(),const._EPOLLIN)
-        loop.handlers[conn.fileno()] = connec_context.handle_event()
+        loop.handlers[conn.fileno()] = connec_context.handle_event
