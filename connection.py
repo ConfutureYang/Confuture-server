@@ -23,5 +23,6 @@ class HTTPConnection(object):
                     if data:
                         self.receive_data += data
                     else:
+                        loop.poll.unregister(self.conn.fileno())
                         print "all_data = {}".format(self.receive_data)
                         break
