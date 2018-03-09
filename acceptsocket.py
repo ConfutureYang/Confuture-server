@@ -8,7 +8,6 @@ import connection
 
 class AccpetSocket(object):
     def __init__(self,sock):
-        self.sock = sock
 
     def bind_socket(self,port):
         host = ("",port)
@@ -16,6 +15,7 @@ class AccpetSocket(object):
         accept_socket.bind(host)
         accept_socket.listen(5)
         accept_socket.setblocking(False)
+        self.sock = accept_socket
         return self.sock
 
     def handle_event(self, event, loop):
