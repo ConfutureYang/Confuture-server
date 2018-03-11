@@ -5,6 +5,7 @@
 import socket
 import mainioloop
 import socketstream
+import const
 
 class TCPServer(object):
 
@@ -16,7 +17,8 @@ class TCPServer(object):
         accept_socket.setblocking(False)
         self.sock = accept_socket
         self.loop = mainioloop.MainLoop()
-        self.loop.add_handler(self.sock.fileno(),self.handle_connection)
+        self.loop.add_handler(self.sock,self.handle_connection,const._EPOLLIN)
+        self.loop.start()
 
 
     def handle_connection(self,fd,event):
@@ -25,6 +27,4 @@ class TCPServer(object):
         except Exception,e:
             print "error in TCPServer:{}".format(e)
         else:
-            sock_stream = socketstream.SocketStream(conn)
-            self.loop.add_handler(conn,sock_stream.handle_event)
-
+            socketstream.SocketStream(conn)

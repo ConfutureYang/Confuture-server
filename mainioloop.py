@@ -4,33 +4,39 @@
 #
 import select
 import const
-import TCPServer
+import tcpserver
 
 DEFAULT_TIMEOUT = 3000
 
 class MainLoop(object):
 
+    __instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if MainLoop.__instance == None:
+            MainLoop.__instance = object.__new__(cls, *args, **kwargs)
+        return  MainLoop.__instance
+
     def __init__(self):
-        self.poll = select.epoll()
+        self.select_poll = select.epoll()
         self.handlers = {}
-
-
-    def bind(self, port):
-        tcp_server = TCPServer.TCPServer()
-        bind_sock = tcp_server.bind_socket(port)
-        self.poll.register(bind_sock.fileno(),const._EPOLLIN)
-        self.handlers[bind_sock.fileno()] = tcp_server.handle_event
-
 
     def start(self):
         while True:
-            events = self.poll.poll(DEFAULT_TIMEOUT)
-            if not events:
-                continue
-            for fd, event in events:
+            print "start poll"
+            events = self.select_poll.poll(DEFAULT_TIMEOUT)
+            print "events:{}".format(events)
+            for fd,event in events:
                 handler = self.handlers[fd]
-                handler(event,self)
+                handler(fd,event)
 
+    def add_handler(self,conn,func,event):
+        print "register fd:{}".format(conn.fileno())
+        self.select_poll.register(conn.fileno(),event)
+        self.handlers[conn.fileno()] = func
 
-
+    def remove_handler(self,conn):
+        print "unregister fd:{}".format(conn.fileno())
+        self.select_poll.unregister(conn.fileno())
+        self.handlers.pop(conn.fileno())
 

@@ -1,6 +1,4 @@
-import mainioloop
+import tcpserver
 
-
-loop = mainioloop.MainLoop()
-loop.bind(8888)
-loop.start()
+tcp_server = tcpserver.TCPServer()
+tcp_server.listen(8888)
