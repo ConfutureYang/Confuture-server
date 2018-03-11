@@ -11,6 +11,7 @@ class SocketStream(object):
 
     def __init__(self,sock):
         self.sock = sock
+        self.sock.setblocking(False)
         self.receive_data = ''
         self.loop = mainioloop.MainLoop()
         self.add_into_loop()
@@ -23,6 +24,7 @@ class SocketStream(object):
                     data = self.sock.recv(1024)
                 except Exception,e:
                     print "error in socketstream {}".format(e)
+                    break
                 else:
                     if data:
                         self.receive_data = self.receive_data + data

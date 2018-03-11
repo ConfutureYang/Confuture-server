@@ -25,6 +25,8 @@ class MainLoop(object):
         while True:
             print "start poll"
             events = self.select_poll.poll(DEFAULT_TIMEOUT)
+            if not events:
+                continue
             print "events:{}".format(events)
             for fd,event in events:
                 handler = self.handlers[fd]
