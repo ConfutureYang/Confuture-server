@@ -4,7 +4,7 @@
 #
 import select
 import const
-import acceptsocket
+import TCPServer
 
 DEFAULT_TIMEOUT = 3000
 
@@ -16,10 +16,10 @@ class MainLoop(object):
 
 
     def bind(self, port):
-        accept_sock = acceptsocket.AccpetSocket()
-        bind_sock = accept_sock.bind_socket(port)
+        tcp_server = TCPServer.TCPServer()
+        bind_sock = tcp_server.bind_socket(port)
         self.poll.register(bind_sock.fileno(),const._EPOLLIN)
-        self.handlers[bind_sock.fileno()] = accept_sock.handle_event
+        self.handlers[bind_sock.fileno()] = tcp_server.handle_event
 
 
     def start(self):

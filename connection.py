@@ -24,5 +24,10 @@ class HTTPConnection(object):
                         self.receive_data += data
                     else:
                         loop.poll.unregister(self.conn.fileno())
+                        # message = self.receive_data + "back to you"
+                        # self.conn.sendall(message)
                         print "all_data = {}".format(self.receive_data)
                         break
+        # if event & const._EPOLLOUT:
+        #     message = self.receive_data + "back to you"
+        #     self.conn.sendall(message)

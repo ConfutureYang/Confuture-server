@@ -6,7 +6,7 @@ import socket
 import const
 import connection
 
-class AccpetSocket(object):
+class TCPServer(object):
 
     def bind_socket(self,port):
         host = ("",port)
