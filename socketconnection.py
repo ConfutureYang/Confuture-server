@@ -7,7 +7,7 @@ import mainioloop
 
 import const
 
-class SocketStream(object):
+class SocketConnection(object):
 
     def __init__(self,sock):
         self.sock = sock
