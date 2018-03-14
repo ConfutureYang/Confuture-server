@@ -5,7 +5,6 @@
 import socket
 import mainioloop
 import socketconnection
-import httpconnection
 import const
 
 class TCPServer(object):
@@ -28,4 +27,4 @@ class TCPServer(object):
         except Exception,e:
             print "error in TCPServer:{}".format(e)
         else:
-            httpconnection.HttpConnection(conn)
+            socketconnection.SocketConnection(conn)
