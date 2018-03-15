@@ -77,6 +77,7 @@ class HttpConnection(SocketConnection):
                 response_data = request_fun(self)
                 http_response_data = self.create_http_response(response_data)
                 self.sock.sendall(http_response_data)
+                self.sock.close()
                 print "resonponse successfully"
                 return
         print "response failed"
